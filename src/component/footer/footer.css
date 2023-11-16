@@ -1,0 +1,34 @@
+footer {
+  margin-top: 12rem;
+  font-family: sans-serif;
+  padding: 5rem 20px;
+  background-color: rgb(5, 5, 60);
+  color: white;
+}
+
+h6{
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.about{
+    margin-bottom: 2rem;
+}
+
+.row {
+  width: 80%;
+  margin: auto;
+}
+
+.container {
+  margin-top: 3rem;
+}
+
+
+.footer-items {
+  margin-top: 2rem;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}

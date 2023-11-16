@@ -1,0 +1,39 @@
+
+.banner{
+    position: relative;
+    top:102vh;
+    width: 100%;
+}
+
+.banner-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+}
+
+
+
+.banner-items{
+    position: absolute;
+    width:70%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    border: 1px solid red;
+    place-items: center;
+}
+
+.banner-items img{
+    width: 80%;
+    height:15rem;
+    object-fit:fill;
+}
+
+
+
+
+
+
+
+
+

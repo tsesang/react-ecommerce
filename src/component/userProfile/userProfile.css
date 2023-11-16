@@ -1,0 +1,66 @@
+.container {
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  padding: 10px 10rem;
+  font-size: 0.9rem;
+  font-family: sans-serif;
+  margin-top: 0rem;
+}
+
+.container > *{
+    padding: 20px;
+
+}
+
+.container .side-menu .sections > * {
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.container .side-menu .sections > p {
+  padding-left: 15px;
+}
+
+.container .side-menu .title {
+  font-size: 1.2rem;
+}
+.container .side-menu .sections > * {
+  margin-bottom: 1rem;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible{
+    display: block;
+}
+
+
+
+/*profile edit*/
+
+.edit-profile > h1 {
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.edit-profile input {
+  width: 150%;
+  padding: 7px;
+}
+
+.update {
+  padding: 10px 20px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}

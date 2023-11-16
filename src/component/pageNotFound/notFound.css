@@ -1,0 +1,19 @@
+
+.not-found{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 70vh;
+     width: 100%;
+     text-align: center;
+}
+
+.not-found div  > h1{
+    font-size: 4rem;
+    text-transform: uppercase;
+}
+
+.not-found div>a{
+    margin-top: 5rem;
+}
+

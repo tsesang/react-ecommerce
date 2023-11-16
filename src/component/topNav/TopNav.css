@@ -1,0 +1,42 @@
+/* ----------------top nav styles ----------------------*/
+
+.top-nav {
+    width: 100%;
+    background-color: rgb(239, 239, 239);
+    height: 2.5rem;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+  
+  .top-nav-content {
+    margin-left: 85%;
+  }
+
+  @media screen and (max-width:450px) {
+    .top-nav-content > *{
+      padding: none;
+    }
+
+    .top-nav-content{
+      display: flex;
+      margin-left:60%;
+    }
+
+    
+  }
+
+
+  /* @media screen and (min-width: 480px) {
+    #leftsidebar {width: 200px; float: left;}
+    #main {margin-left: 216px;}
+  } */
+  
+  .top-nav-content > * {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: red;
+    color: white;
+    border: 1px solid white;
+  }
