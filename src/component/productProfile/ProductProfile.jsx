@@ -9,7 +9,6 @@ import { addItemToWishList } from "../wishlist/WishlistSlice";
 
 import Navbar from "../navbar/Navbar";
 import TopNav from "../topNav/TopNav";
-import Footer from "../footer/Footer";
 
 import "./ProductProfile.css";
 
@@ -261,7 +260,6 @@ export default function ProductProfile() {
           </div>
         </div>
       </div>
-      <Footer/>
     </>
   );
 }

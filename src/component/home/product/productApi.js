@@ -2,6 +2,6 @@
 import axios from 'axios';
 
 export function fetchProducts() {
-     return axios.get('https://api.escuelajs.co/api/v1/products')
+     return axios.get('https://api.escuelajs.co/api/v1/products?offset=0&limit=10')
 }
 

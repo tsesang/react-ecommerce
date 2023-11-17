@@ -75,7 +75,7 @@ export default function UserProfile() {
             <p>order history</p>
           </div>
         </div>
-        <div className={viewProfile ? "visible" : "hidden"}>
+        <div className={viewProfile ? "visibleUserProfile" : "hidden"}>
           <div>
             <table>
               <tr>
@@ -108,7 +108,7 @@ export default function UserProfile() {
             </table>
           </div>
         </div>
-        <div className={viewEditProfile ? "visible" : "hidden"}>
+        <div className={viewEditProfile ? "visibleUserProfile" : "hidden"}>
           <div className="edit-profile">
             <h1>edit your profile</h1>
             <table>
@@ -151,7 +151,7 @@ export default function UserProfile() {
                 value={detail.address1}
                   name="address1"
                   id=""
-                  cols="80"
+                  cols="30"
                   onChange={onchangeHandlerPersonalDetail}
                   rows="5"
                 ></textarea>
@@ -162,7 +162,7 @@ export default function UserProfile() {
                 value={detail.address2}
                   name="address2"
                   id=""
-                  cols="80"
+                  cols="30"
                   onChange={onchangeHandlerPersonalDetail}
                   rows="5"
                 ></textarea>

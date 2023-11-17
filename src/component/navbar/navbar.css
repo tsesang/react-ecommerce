@@ -96,6 +96,10 @@
   visibility: visible;
 }
 
+.not-visible {
+  visibility: hidden;
+}
+
 @media screen and (max-width: 480px) {
   .navbar-section {
     visibility: hidden;
@@ -110,11 +114,17 @@
   }
 
   .navbar-icons {
-    color: black;
-    visibility: hidden;
-    position: relative;
     top: 4rem;
-    left: -3.5rem;
+    left: 14.5rem;
+    position: abos;
+    position: absolute;
+    display: grid;
+    background-color: red;
+    color: white;
+    width: 5.9rem;
+  }
+  .navbar-icons > * {
+    margin-bottom: 0;
   }
 
   .bars {
@@ -125,9 +135,5 @@
     top: 1.3rem;
     font-size: 1.5rem;
     color: white;
-  }
-
-  .visible {
-    visibility: visible;
   }
 }

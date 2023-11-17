@@ -7,7 +7,7 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import "./navbar.css";
 
 import { useDispatch } from "react-redux";
@@ -41,9 +41,6 @@ function Navbar() {
 
   const onclickHandlerForMenuBar = () => {
     setVisible(!visible);
-  };
-  const onclickHandlerForProfile = () => {
-    setProfileVisible(!profileVisible);
   };
 
   const sections = ["cloth", "furniture", "electronic", "shoe"];
@@ -88,12 +85,13 @@ function Navbar() {
 
       <div
         className={
-          visible ? "navbar-icons center visible" : "navbar-icons center"
+          visible ? "navbar-icons center visible" : "navbar-icons center not-visible"
         }
+        onClick={onclickHandlerForMenuBar}
       >
         <FontAwesomeIcon
           icon={faUser}
-          onClick={onclickHandlerForProfile}
+          onClick={() => navigate("/userProfile")}
         ></FontAwesomeIcon>
         <FontAwesomeIcon
           icon={faHeart}
@@ -111,14 +109,6 @@ function Navbar() {
         onClick={onclickHandlerForMenuBar}
         className="bars"
       ></FontAwesomeIcon>
-
-      <div className={profileVisible ? "profile visible" : "profile"}>
-        <p onClick={()=>navigate('/userProfile')}>profile</p>
-        <p>coupons</p>
-        <p>purchase history</p>
-        <p>order history</p>
-        <p>logout</p>
-      </div>
     </div>
   );
 }

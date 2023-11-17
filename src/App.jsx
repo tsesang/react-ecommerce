@@ -2,6 +2,10 @@ import "./App.css";
 import ProductProfile from "./component/productProfile/ProductProfile";
 import Home from "./component/home/Home";
 import Cart from "./component/cart/Cart";
+
+
+
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./component/pageNotFound/NotFound";
 import WishList from "./component/wishlist/WishList";

@@ -24,7 +24,7 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.products = action.payload;
+        state.products = [...state.products, ...action.payload];
       });
   },
 });

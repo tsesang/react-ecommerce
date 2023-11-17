@@ -2,7 +2,6 @@ import WishListProductDetails from "./WishListProductDetail";
 import TopNav from "../topNav/TopNav";
 import Navbar from "../navbar/Navbar";
 
-import Footer from "../footer/Footer";
 
 
 import "./wishList.css";
@@ -47,7 +46,6 @@ export default function WishList() {
           </div>
         )}
       </div>
-      <Footer/>
 
     </>
   );

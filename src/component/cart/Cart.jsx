@@ -1,7 +1,6 @@
 import CartProductDetails from "./cartProductDetail";
 import CartShoppingSummary from "./cartShoppingSummary";
 
-import Footer from "../footer/Footer";
 
 import TopNav from "../topNav/TopNav";
 import Navbar from "../navbar/Navbar";
@@ -54,7 +53,6 @@ export default function Cart() {
           </div>
         )}
       </div>
-      <Footer/>
     </>
   );
 }
