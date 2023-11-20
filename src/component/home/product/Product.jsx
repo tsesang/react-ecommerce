@@ -19,6 +19,7 @@ export default function Product() {
   //fetching the value of search from search slice in navbar to perform search function
   const search = useSelector((state) => state.search.searchData);
 
+
   //gettting the status for skeleton loading
   const isLoading = useSelector((state) => state.product.status);
 
@@ -129,36 +130,44 @@ export default function Product() {
             </>
           ) : (
             <>
-              {products
-                .filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.category.name.toLowerCase().includes(search);
-                })
-                .map((product, index) => {
-                  return (
-                    <div
-                      key={index}
-                      className="product-item"
-                      onClick={() => {
-                        imgClickHandler(product.id);
-                      }}
-                    >
-                      <button>
-                        {
-                          <img
-                            src={product.category.image}
-                            alt={product.image}
-                          />
-                        }
-                      </button>
-                      <p className="name uppercase">{product.category.name}</p>
-                      <h3 className="title ">{product.title}</h3>
-                      <h3 className="price">Rs. {product.price}</h3>
-                      <p className="rating">Rating ****</p>
-                    </div>
-                  );
-                })}
+              {products ? (
+                <>
+                  {products
+                    .filter((item) => {
+                      return search.toLowerCase() === ""
+                        ? item
+                        : item.category.name.toLowerCase().includes(search);
+                    })
+                    .map((product, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="product-item"
+                          onClick={() => {
+                            imgClickHandler(product.id);
+                          }}
+                        >
+                          <button>
+                            {
+                              <img
+                                src={product.category.image}
+                                alt={product.image}
+                              />
+                            }
+                          </button>
+                          <p className="name uppercase">
+                            {product.category.name}
+                          </p>
+                          <h3 className="title ">{product.title}</h3>
+                          <h3 className="price">Rs. {product.price}</h3>
+                          <p className="rating">Rating ****</p>
+                        </div>
+                      );
+                    })}
+                </>
+              ) : (
+                <>{navigate("/noProductFound")}</>
+              )}
             </>
           )}
         </div>

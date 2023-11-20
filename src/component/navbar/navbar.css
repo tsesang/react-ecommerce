@@ -105,11 +105,13 @@
     visibility: hidden;
   }
 
-  .visible{
+  /* so in responsive this will be different -- opposite thing will happen */
+
+  .visible {
     visibility: hidden;
   }
 
-  .not-visible{
+  .not-visible {
     visibility: visible;
   }
 

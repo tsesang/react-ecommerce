@@ -13,6 +13,7 @@ import AddedToCart from "./component/addedToCart/AddedToCart";
 import AddedToWishList from "./component/addedToWishList/AddedToWishList";
 import ProductPage from "./component/productPage/ProductPage";
 import UserProfile from "./component/userProfile/UserProfile";
+import NoProductFound from "./component/NoProductFound";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path="product" element={<ProductPage/>}></Route>
           <Route path="userProfile" element={<UserProfile/>}></Route>
           <Route path="/*" element={<NotFound />}></Route>
+          <Route path="/noProductFound" element={<NoProductFound/>}></Route>
 
         </Routes>
       </Router>

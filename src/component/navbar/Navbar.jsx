@@ -20,8 +20,7 @@ function Navbar() {
   //state to handle the bar menu icon in mobile view
   const [visible, setVisible] = useState(true);
 
-  //state to handle the profile menu
-  const [profileVisible, setProfileVisible] = useState(false);
+
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
