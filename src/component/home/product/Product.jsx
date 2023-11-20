@@ -15,7 +15,6 @@ export default function Product() {
 
   //fetching the products list from the reducer product
   const products = useSelector((state) => state.product.products);
-  console.log("products fetched ...   :", products);
 
   //fetching the value of search from search slice in navbar to perform search function
   const search = useSelector((state) => state.search.searchData);
@@ -36,21 +35,17 @@ export default function Product() {
 
   //everytime page dependent changes this useeffect will run and add new item to the product list in redux .....
   useEffect(() => {
-    console.log("page increase and render .... ")
     dispatch(fetchAsync());
   }, [page]);
 
   //fucntion to handle the infinite search
-
   const handleInfiniteHandler = async () => {
     try {
-      console.log("innerhieght : ", window.innerHeight);
       if (
         window.innerHeight + window.document.documentElement.scrollTop + 1 >=
         document.documentElement.scrollHeight
       ) {
         setPage((prev) => prev + 1);
-        console.log("page increased ... ");
       }
     } catch (err) {
       console.log(err);
@@ -58,9 +53,10 @@ export default function Product() {
   };
 
   useEffect(() => {
-    console.log("1st useeffect .... ")
-    window.addEventListener("scroll", handleInfiniteHandler);
-    return ()=>window.removeEventListener("scroll", handleInfiniteHandler);
+    if (!search) {
+      window.addEventListener("scroll", handleInfiniteHandler);
+      return () => window.removeEventListener("scroll", handleInfiniteHandler);
+    }
   }, []);
 
   //onclick img navigate .....
@@ -75,9 +71,44 @@ export default function Product() {
         <div className="product-container">
           {isLoading == "loading" ? (
             <>
+              <>
+                {products
+                  .filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.category.name.toLowerCase().includes(search);
+                  })
+                  .map((product, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="product-item"
+                        onClick={() => {
+                          imgClickHandler(product.id);
+                        }}
+                      >
+                        <button>
+                          {
+                            <img
+                              src={product.category.image}
+                              alt={product.image}
+                            />
+                          }
+                        </button>
+                        <p className="name uppercase">
+                          {product.category.name}
+                        </p>
+                        <h3 className="title ">{product.title}</h3>
+                        <h3 className="price">Rs. {product.price}</h3>
+                        <p className="rating">Rating ****</p>
+                      </div>
+                    );
+                  })}
+              </>
+
               {emptyArray.map((item, index) => {
                 return (
-                  <div className="product-item">
+                  <div className="product-item" key={index}>
                     <Skeleton height="7rem" />
 
                     <p className="name uppercase">
@@ -98,7 +129,7 @@ export default function Product() {
             </>
           ) : (
             <>
-              {products 
+              {products
                 .filter((item) => {
                   return search.toLowerCase() === ""
                     ? item
@@ -135,3 +166,6 @@ export default function Product() {
     </SkeletonTheme>
   );
 }
+
+//product.isloading != loading -> render the product fetched from the api ----we can get product from filter,search,product result
+// product.isloading ==loading - > skeleton loading --- first show the available product fetched then after that render the skeleton loader

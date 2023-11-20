@@ -24,7 +24,6 @@ export default function CartProductDetails() {
     ).filter((item) => item.id != id);
     localStorage.setItem("cart", JSON.stringify(filteredCartItemLocalStorage));
     setproduct(filteredCartItemLocalStorage)
-    console.log("inside the cart component .... ");
   };
 
   return (

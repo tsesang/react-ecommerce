@@ -18,7 +18,7 @@ import { setSearch } from "./navSlice";
 
 function Navbar() {
   //state to handle the bar menu icon in mobile view
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
 
   //state to handle the profile menu
   const [profileVisible, setProfileVisible] = useState(false);
@@ -26,17 +26,19 @@ function Navbar() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  //state to store the searching text
   const [searchData, setSearchData] = useState("");
 
+  //this function will handle the debouncing
+  //so everytime this function executes it will set teh serachdata from the  input
+  //there is this setsearch action which will set the search which we will the data into the product when searching ....
   const onChangeHandler = (e) => {
     setSearchData(e.target.value);
     let timeout;
     clearTimeout(timeout);
     timeout = setTimeout(() => {
-      console.log("inside the debounce function ....");
       dispatch(setSearch(searchData));
     }, 500);
-    console.log("input value : ", e.target.value);
   };
 
   const onclickHandlerForMenuBar = () => {
@@ -62,6 +64,7 @@ function Navbar() {
             <span
               key={index}
               onClick={() => {
+                navigate('/')
                 dispatch(setSearch(item));
               }}
             >
@@ -85,9 +88,11 @@ function Navbar() {
 
       <div
         className={
-          visible ? "navbar-icons center visible" : "navbar-icons center not-visible"
+          visible
+            ? "navbar-icons center visible"
+            : "navbar-icons center not-visible"
         }
-        onClick={onclickHandlerForMenuBar}
+        
       >
         <FontAwesomeIcon
           icon={faUser}

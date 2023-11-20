@@ -174,7 +174,6 @@ export default function UserProfile() {
                     name="img"
                     type="file"
                     onChange={(e) => {
-                      console.log(e.target.files[0]);
                       setImg(e.target.files[0].name);
                     }}
                   />

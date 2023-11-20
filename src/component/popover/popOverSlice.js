@@ -10,7 +10,6 @@ export const popSlice = createSlice({
   reducers: {
     //reducer for adding items to the cart
     addMessage: (state, action) => {
-      console.log("action payload : ", action.payload);
       state.items.push(action.payload);
     },
   },

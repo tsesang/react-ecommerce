@@ -105,6 +105,14 @@
     visibility: hidden;
   }
 
+  .visible{
+    visibility: hidden;
+  }
+
+  .not-visible{
+    visibility: visible;
+  }
+
   .navbar-search .icon-search {
     color: black;
   }

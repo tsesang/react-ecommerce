@@ -11,7 +11,6 @@ export const cartSlice = createSlice({
   reducers: {
     //reducer for adding items to the cart
     addItem: (state, action) => {
-      console.log("action payload : ", action.payload);
       state.items.push(action.payload);
     },
     //reducer for removing items from the cart

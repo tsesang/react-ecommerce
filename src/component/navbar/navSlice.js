@@ -11,7 +11,6 @@ export const searchSlice = createSlice({
   reducers: {
     //reducer for adding items to the cart
     setSearch: (state, action) => {
-      console.log("insdie the dipsatch function setsearch ....")
       state.searchData = action.payload;
     },
   },
