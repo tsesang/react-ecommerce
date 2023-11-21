@@ -23,7 +23,7 @@ export default function CartProductDetails() {
       localStorage.getItem("cart")
     ).filter((item) => item.id != id);
     localStorage.setItem("cart", JSON.stringify(filteredCartItemLocalStorage));
-    setproduct(filteredCartItemLocalStorage)
+    setproduct(filteredCartItemLocalStorage);
   };
 
   return (
@@ -34,7 +34,7 @@ export default function CartProductDetails() {
             <img
               src={item.images}
               alt=""
-              onClick={() => navigate("/productProfile/5")}
+              onClick={() => navigate(`/productProfile/${item.id}`)}
             />
             <div className="details">
               <p className="title">{item.title}</p>
@@ -47,8 +47,14 @@ export default function CartProductDetails() {
               </button>
             </div>
             <div>
-              <p>quantity : {item.quantity} </p>
-
+              <p>
+                quantity{" "}
+                <input
+                  type="number"
+                  value={item.quantity}
+                  onChange={() => console.log("hello changing value ... ")}
+                />
+              </p>
               <p>Subtotal : Rs. {item.quantity * item.price} /-</p>
             </div>
           </div>

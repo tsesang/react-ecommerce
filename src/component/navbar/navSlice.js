@@ -11,6 +11,7 @@ export const searchSlice = createSlice({
   reducers: {
     //reducer for adding items to the cart
     setSearch: (state, action) => {
+      console.log("search : ", action.payload);
       state.searchData = action.payload;
     },
   },

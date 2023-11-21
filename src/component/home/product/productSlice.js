@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchProducts } from "./productApi";
+
+
 const initialState = {
   products: [],
   status: "idle",
@@ -7,8 +9,8 @@ const initialState = {
 
 export const fetchAsync = createAsyncThunk(
   "products/fetchProduct",
-  async () => {
-    const response = await fetchProducts();
+  async (page) => {
+    const response = await fetchProducts(page);
     return response.data;
   }
 );
@@ -16,7 +18,8 @@ export const fetchAsync = createAsyncThunk(
 export const productsSlice = createSlice({
   name: "products",
   initialState,
-  reducers: {},
+  reducers: {
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAsync.pending, (state) => {
@@ -28,5 +31,6 @@ export const productsSlice = createSlice({
       });
   },
 });
+
 
 export default productsSlice.reducer;

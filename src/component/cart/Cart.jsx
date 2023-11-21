@@ -23,7 +23,6 @@ export default function Cart() {
     setproduct(cartProduct)
   },[])
 
-
   return (
     <>
       <TopNav />

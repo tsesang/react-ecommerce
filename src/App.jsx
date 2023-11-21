@@ -4,14 +4,11 @@ import Home from "./component/home/Home";
 import Cart from "./component/cart/Cart";
 
 
-
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NotFound from "./component/pageNotFound/NotFound";
 import WishList from "./component/wishlist/WishList";
 import AddedToCart from "./component/addedToCart/AddedToCart";
 import AddedToWishList from "./component/addedToWishList/AddedToWishList";
-import ProductPage from "./component/productPage/ProductPage";
 import UserProfile from "./component/userProfile/UserProfile";
 import NoProductFound from "./component/NoProductFound";
 
@@ -28,7 +25,6 @@ function App() {
           <Route path="/productProfile/:id" element={<ProductProfile />} />
           <Route path="addedToCart" element={<AddedToCart/>}></Route>
           <Route path="addedToWishList" element={<AddedToWishList/>}></Route>
-          <Route path="product" element={<ProductPage/>}></Route>
           <Route path="userProfile" element={<UserProfile/>}></Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/noProductFound" element={<NoProductFound/>}></Route>

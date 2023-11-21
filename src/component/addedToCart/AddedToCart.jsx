@@ -14,7 +14,7 @@ export default function AddedToCart() {
   //consider the added to cart item is the last item in cart
   const addedProduct = product[product.length - 1];
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>

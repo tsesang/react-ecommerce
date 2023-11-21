@@ -28,6 +28,7 @@ export const productProfileSlice = createSlice({
       })
       .addCase(fetchProfileAsync.fulfilled, (state, action) => {
         state.product = action.payload;
+        console.log("the fetched product : ", state.product);
         state.status = "fulfilled";
       });
   },

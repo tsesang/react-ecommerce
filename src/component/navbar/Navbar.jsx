@@ -20,8 +20,6 @@ function Navbar() {
   //state to handle the bar menu icon in mobile view
   const [visible, setVisible] = useState(true);
 
-
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -63,7 +61,7 @@ function Navbar() {
             <span
               key={index}
               onClick={() => {
-                navigate('/')
+                navigate("/");
                 dispatch(setSearch(item));
               }}
             >
@@ -91,7 +89,6 @@ function Navbar() {
             ? "navbar-icons center visible"
             : "navbar-icons center not-visible"
         }
-        
       >
         <FontAwesomeIcon
           icon={faUser}

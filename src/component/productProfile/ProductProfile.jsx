@@ -48,13 +48,26 @@ export default function ProductProfile() {
       quantity: quantity,
     };
     //dispatching the updatedProduct obj to the reducer
+
     dispatch(addItem(updatedProduct));
     navigate("/addedToCart");
 
     // this thing will fetch the item that is already in wishcart and add the new wishlist that is going to add in the list here
-    const previousCartList = JSON.parse(localStorage.getItem("cart"));
+    let previousCartList = JSON.parse(localStorage.getItem("cart"));
+    let flag = true;
     if (previousCartList) {
-      previousCartList.push(updatedProduct);
+      previousCartList = previousCartList.map((item) => {
+        if (item.id === updatedProduct.id) {
+          flag = false;
+          console.log("item found : ", item);
+          return updatedProduct;
+        } else {
+          return item;
+        }
+      });
+      if (flag) {
+        previousCartList.push(updatedProduct);
+      }
       localStorage.setItem("cart", JSON.stringify(previousCartList));
     } else {
       localStorage.setItem("cart", JSON.stringify([updatedProduct]));
@@ -166,7 +179,7 @@ export default function ProductProfile() {
               Quantity{" "}
               <input
                 type="number"
-                value={quantity}
+                value={product.quantity}
                 min={1}
                 max={5}
                 onChange={(e) => setQuantity(e.target.value)}

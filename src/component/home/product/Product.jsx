@@ -18,25 +18,31 @@ export default function Product() {
 
   //fetching the value of search from search slice in navbar to perform search function
   const search = useSelector((state) => state.search.searchData);
-
+  console.log("search value in global context : ", search);
 
   //gettting the status for skeleton loading
   const isLoading = useSelector((state) => state.product.status);
 
-  //fetching the filter data from search slice
-  // const filter = useSelector((state)=>state.search.filterData)
-
   //empty array to map the skeleton loader
   const emptyArray = ["", "", "", "", "", "", "", "", "", ""];
+
+  //
+  function setSearchProduct(search) {
+    return products.filter((item) => {
+      return search.toLowerCase() === ""
+        ? item
+        : item.title.toLowerCase().includes(search);
+    });
+  }
 
   //...............................infinite scrolling functions here ...........................
 
   //for infinite scrolling --
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
 
-  //everytime page dependent changes this useeffect will run and add new item to the product list in redux .....
+  //everytime page dependent changes this useeffect will run and add new item to the product list in redux  will fetch the product according to the offset defined by page.....
   useEffect(() => {
-    dispatch(fetchAsync());
+    dispatch(fetchAsync(page));
   }, [page]);
 
   //fucntion to handle the infinite search
@@ -55,6 +61,7 @@ export default function Product() {
 
   useEffect(() => {
     if (!search) {
+      console.log("search value : ", search);
       window.addEventListener("scroll", handleInfiniteHandler);
       return () => window.removeEventListener("scroll", handleInfiniteHandler);
     }
@@ -66,6 +73,8 @@ export default function Product() {
     navigate(`/productProfile/${id}`);
   };
 
+  
+
   return (
     <SkeletonTheme baseColor="grey" highlightColor="#444" duration={1}>
       <div className="product">
@@ -73,13 +82,65 @@ export default function Product() {
           {isLoading == "loading" ? (
             <>
               <>
-                {products
-                  .filter((item) => {
-                    return search.toLowerCase() === ""
-                      ? item
-                      : item.category.name.toLowerCase().includes(search);
-                  })
-                  .map((product, index) => {
+                {setSearchProduct(search).map((product, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="product-item"
+                      onClick={() => {
+                        imgClickHandler(product.id);
+                      }}
+                    >
+                      <button>
+                        {
+                          <img
+                            src={product.category.image}
+                            alt={product.image}
+                          />
+                        }
+                      </button>
+                      <p className="name uppercase">{product.category.name}</p>
+                      <h3 className="title ">{product.title}</h3>
+                      <h3 className="price">Rs. {product.price}</h3>
+                      <p className="rating">Rating ****</p>
+                    </div>
+                  );
+                })}
+              </>
+
+              {search ? (
+                ""
+              ) : (
+                <>
+                  {emptyArray.map((item, index) => {
+                    return (
+                      <div className="product-item" key={index}>
+                        <Skeleton height="7rem" />
+
+                        <p className="name uppercase">
+                          <Skeleton width="70%" />
+                        </p>
+                        <h3 className="title ">
+                          <Skeleton width="70%" />
+                        </h3>
+                        <h3 className="price">
+                          <Skeleton width="40%" />
+                        </h3>
+                        <p className="rating">
+                          <Skeleton width="30%" />
+                        </p>
+                      </div>
+                    );
+                  })}
+                  X
+                </>
+              )}
+            </>
+          ) : (
+            <>
+              {products ? (
+                <>
+                  {setSearchProduct(search).map((product, index) => {
                     return (
                       <div
                         key={index}
@@ -105,65 +166,6 @@ export default function Product() {
                       </div>
                     );
                   })}
-              </>
-
-              {emptyArray.map((item, index) => {
-                return (
-                  <div className="product-item" key={index}>
-                    <Skeleton height="7rem" />
-
-                    <p className="name uppercase">
-                      <Skeleton width="70%" />
-                    </p>
-                    <h3 className="title ">
-                      <Skeleton width="70%" />
-                    </h3>
-                    <h3 className="price">
-                      <Skeleton width="40%" />
-                    </h3>
-                    <p className="rating">
-                      <Skeleton width="30%" />
-                    </p>
-                  </div>
-                );
-              })}
-            </>
-          ) : (
-            <>
-              {products ? (
-                <>
-                  {products
-                    .filter((item) => {
-                      return search.toLowerCase() === ""
-                        ? item
-                        : item.category.name.toLowerCase().includes(search);
-                    })
-                    .map((product, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className="product-item"
-                          onClick={() => {
-                            imgClickHandler(product.id);
-                          }}
-                        >
-                          <button>
-                            {
-                              <img
-                                src={product.category.image}
-                                alt={product.image}
-                              />
-                            }
-                          </button>
-                          <p className="name uppercase">
-                            {product.category.name}
-                          </p>
-                          <h3 className="title ">{product.title}</h3>
-                          <h3 className="price">Rs. {product.price}</h3>
-                          <p className="rating">Rating ****</p>
-                        </div>
-                      );
-                    })}
                 </>
               ) : (
                 <>{navigate("/noProductFound")}</>
