@@ -1,24 +1,21 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import "react-loading-skeleton/dist/skeleton.css";
+import { fetchAsync } from "./productSlice";
+import "./Product.css";
 
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { fetchAsync } from "./productSlice";
-
-import "./Product.css";
-
 export default function Product() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   //fetching the products list from the reducer product
   const products = useSelector((state) => state.product.products);
 
   //fetching the value of search from search slice in navbar to perform search function
   const search = useSelector((state) => state.search.searchData);
-  console.log("search value in global context : ", search);
 
   //gettting the status for skeleton loading
   const isLoading = useSelector((state) => state.product.status);
@@ -26,7 +23,7 @@ export default function Product() {
   //empty array to map the skeleton loader
   const emptyArray = ["", "", "", "", "", "", "", "", "", ""];
 
-  //
+  //for filtering the product
   function setSearchProduct(search) {
     return products.filter((item) => {
       return search.toLowerCase() === ""
@@ -35,45 +32,48 @@ export default function Product() {
     });
   }
 
-  //...............................infinite scrolling functions here ...........................
+  // Intersection observer
 
-  //for infinite scrolling --
-  const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const observerRef = useRef(null);
 
-  //everytime page dependent changes this useeffect will run and add new item to the product list in redux  will fetch the product according to the offset defined by page.....
   useEffect(() => {
-    dispatch(fetchAsync(page));
-  }, [page]);
+    if (loading) {
+      dispatch(fetchAsync(offset - 1));
+    }
+  }, [offset]);
 
-  //fucntion to handle the infinite search
-  const handleInfiniteHandler = async () => {
-    try {
-      if (
-        window.innerHeight + window.document.documentElement.scrollTop + 1 >=
-        document.documentElement.scrollHeight
-      ) {
-        setPage((prev) => prev + 1);
+  useEffect(() => {
+    console.log("observer ref : ", observerRef.current);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        console.log("inside the is intersecting ... ");
+        if (entries[0].isIntersecting) {
+          console.log("intersecting....");
+          setOffset((prev) => prev + 1);
+          setLoading(true);
+        }
+      },
+      {
+        threshold: 1,
       }
-    } catch (err) {
-      console.log(err);
+    );
+    console.log("observer : ", observer);
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
     }
-  };
 
-  useEffect(() => {
-    if (!search) {
-      console.log("search value : ", search);
-      window.addEventListener("scroll", handleInfiniteHandler);
-      return () => window.removeEventListener("scroll", handleInfiniteHandler);
-    }
+    return () => {
+      if (observerRef.current) observer.disconnect(observerRef.current);
+    };
   }, []);
 
   //onclick img navigate .....
-  const imgClickHandler = (id) => {
-    //setting the value of the id in product slice to be the id of the image clicked
-    navigate(`/productProfile/${id}`);
-  };
-
-  
+  // const imgClickHandler = (id) => {
+  //   //setting the value of the id in product slice to be the id of the image clicked
+  //   navigate(`/productProfile/${id}`);
+  // };
 
   return (
     <SkeletonTheme baseColor="grey" highlightColor="#444" duration={1}>
@@ -172,11 +172,9 @@ export default function Product() {
               )}
             </>
           )}
+          <span ref={observerRef}>scroll manager</span>
         </div>
       </div>
     </SkeletonTheme>
   );
 }
-
-//product.isloading != loading -> render the product fetched from the api ----we can get product from filter,search,product result
-// product.isloading ==loading - > skeleton loading --- first show the available product fetched then after that render the skeleton loader
