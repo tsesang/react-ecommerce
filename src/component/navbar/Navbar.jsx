@@ -7,7 +7,7 @@ import {
   faBars,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./navbar.css";
 
 import { useDispatch } from "react-redux";
@@ -29,11 +29,11 @@ function Navbar() {
   //this function will handle the debouncing
   //so everytime this function executes it will set teh serachdata from the  input
   //there is this setsearch action which will set the search which we will the data into the product when searching ....
+  let timeoutRef = useRef(null);
   const onChangeHandler = (e) => {
     setSearchData(e.target.value);
-    let timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => {
+    clearTimeout(timeoutRef.current);
+    timeoutRef = setTimeout(() => {
       dispatch(setSearch(searchData));
     }, 500);
   };

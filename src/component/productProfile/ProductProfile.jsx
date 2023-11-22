@@ -127,7 +127,7 @@ export default function ProductProfile() {
           <div className="img">
             {(product.images || []).map((item, index) => {
               return (
-                <div>
+                <div id="index">
                   <button
                     className="img-button"
                     onClick={() => {

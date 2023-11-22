@@ -45,12 +45,9 @@ export default function Product() {
   }, [offset]);
 
   useEffect(() => {
-    console.log("observer ref : ", observerRef.current);
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log("inside the is intersecting ... ");
         if (entries[0].isIntersecting) {
-          console.log("intersecting....");
           setOffset((prev) => prev + 1);
           setLoading(true);
         }
@@ -59,7 +56,6 @@ export default function Product() {
         threshold: 1,
       }
     );
-    console.log("observer : ", observer);
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
@@ -69,11 +65,11 @@ export default function Product() {
     };
   }, []);
 
-  //onclick img navigate .....
-  // const imgClickHandler = (id) => {
-  //   //setting the value of the id in product slice to be the id of the image clicked
-  //   navigate(`/productProfile/${id}`);
-  // };
+  // onclick img navigate .....
+  const imgClickHandler = (id) => {
+    //setting the value of the id in product slice to be the id of the image clicked
+    navigate(`/productProfile/${id}`);
+  };
 
   return (
     <SkeletonTheme baseColor="grey" highlightColor="#444" duration={1}>
@@ -172,7 +168,7 @@ export default function Product() {
               )}
             </>
           )}
-          <span ref={observerRef}>scroll manager</span>
+          <span ref={observerRef}></span>
         </div>
       </div>
     </SkeletonTheme>
