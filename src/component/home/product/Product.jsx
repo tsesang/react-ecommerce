@@ -11,6 +11,9 @@ import "react-loading-skeleton/dist/skeleton.css";
 export default function Product() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+
+
   //fetching the products list from the reducer product
   const products = useSelector((state) => state.product.products);
 

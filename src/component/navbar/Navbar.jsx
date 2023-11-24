@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 //by importing this setsearch thing here---it is doing both the setting the data for both the seraching as well as for filtering
 import { setSearch } from "./navSlice";
+import { fetchAsync } from "../home/product/productSlice";
 
 function Navbar() {
   //state to handle the bar menu icon in mobile view
@@ -29,14 +30,18 @@ function Navbar() {
   //this function will handle the debouncing
   //so everytime this function executes it will set teh serachdata from the  input
   //there is this setsearch action which will set the search which we will the data into the product when searching ....
-  let timeoutRef = useRef(null);
-  const onChangeHandler = (e) => {
+
+  const timeRef = useRef(null);
+
+  function onChangeHandler(e) {
+    clearTimeout(timeRef.current);
     setSearchData(e.target.value);
-    clearTimeout(timeoutRef.current);
-    timeoutRef = setTimeout(() => {
+
+    timeRef.current = setTimeout(() => {
       dispatch(setSearch(searchData));
     }, 500);
-  };
+    console.log("email : ", searchData);
+  }
 
   const onclickHandlerForMenuBar = () => {
     setVisible(!visible);
