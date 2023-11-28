@@ -54,6 +54,7 @@
 
 .navbar-icons {
   margin-left: 4rem;
+  
 }
 
 .navbar-icons > * {
@@ -62,11 +63,15 @@
   cursor: pointer;
 }
 
-.navbar-icons > span {
+.navbar-icons>div{
+  display: flex;
+}
+
+.navbar-icons >div > span {
   position: relative;
-  top: -0.8rem;
-  left: -1.5rem;
+  top: -1.2rem;
   border-radius: 50%;
+  
 }
 
 .bars {
@@ -125,14 +130,15 @@
 
   .navbar-icons {
     top: 4rem;
-    left: 14.5rem;
-    position: abos;
+    left: 15.5rem;
     position: absolute;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     background-color: red;
     color: white;
     width: 5.9rem;
   }
+
   .navbar-icons > * {
     margin-bottom: 0;
   }
@@ -146,4 +152,12 @@
     font-size: 1.5rem;
     color: white;
   }
+
+
+  .navbar-icons > div>span {
+    position: relative;
+    top: -12px;
+    font-size: 30px;
+}
+
 }

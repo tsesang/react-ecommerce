@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   searchData: "",
-  filterData: "",
+  isCategory:false
   // id for setting the value for product profile ( product id to be displayed on click on imag)
 };
 
@@ -11,8 +11,9 @@ export const searchSlice = createSlice({
   reducers: {
     //reducer for adding items to the cart
     setSearch: (state, action) => {
-      console.log("search : ", action.payload);
-      state.searchData = action.payload;
+      console.log("action.payload : ",action.payload.item)
+      state.searchData = action.payload.item;
+      state.isCategory=action.payload.isCategory;
     },
   },
 });

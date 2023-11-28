@@ -42,6 +42,12 @@
   border-radius: 0.2rem;
 }
 
+.remove:hover{
+  background-color: white;
+  border: 1px solid red;
+  color: red;
+}
+
 @media screen and (max-width: 480px) {
   .cart {
     margin: 1rem !important;
@@ -58,6 +64,13 @@
     font-size: 0.7rem !important;
     text-transform: uppercase;
   }
+
+  .remove:hover{
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+  }
+
 
   .cart-product-details-items {
     margin-top: 0.7rem;
@@ -99,4 +112,26 @@
   height: 50vh;
   display: grid;
   place-items: center;
+}
+
+/*cart product*/
+
+.cart-quantity-button{
+  padding: 3px 10px;
+  margin-left: 10px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+  border:none;
+}
+
+.cart-quantity-button:hover{
+  background-color: white;
+  border: 1px solid red;
+  color: red;
+}
+
+
+.edit-quantity-input{
+  width: 4rem;
 }

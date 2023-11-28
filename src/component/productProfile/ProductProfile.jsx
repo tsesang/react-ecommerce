@@ -59,7 +59,6 @@ export default function ProductProfile() {
       previousCartList = previousCartList.map((item) => {
         if (item.id === updatedProduct.id) {
           flag = false;
-          console.log("item found : ", item);
           return updatedProduct;
         } else {
           return item;

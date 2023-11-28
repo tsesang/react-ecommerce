@@ -12,10 +12,12 @@ export default function Product() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
-
   //fetching the products list from the reducer product
   const products = useSelector((state) => state.product.products);
+  console.log("products : ",products);
+
+  //fetching category ---
+  const isCategory = useSelector((state) => state.search.isCategory);
 
   //fetching the value of search from search slice in navbar to perform search function
   const search = useSelector((state) => state.search.searchData);
@@ -28,11 +30,19 @@ export default function Product() {
 
   //for filtering the product
   function setSearchProduct(search) {
-    return products.filter((item) => {
-      return search.toLowerCase() === ""
-        ? item
-        : item.title.toLowerCase().includes(search);
-    });
+    if (isCategory) {
+      return products.filter((item) => {
+        return search.toLowerCase() === ""
+          ? item
+          : item.category.name.toLowerCase().includes(search);
+      });
+    } else {
+      return products.filter((item) => {
+        return search.toLowerCase() === ""
+          ? item
+          : item.title.toLowerCase().includes(search);
+      });
+    }
   }
 
   // Intersection observer
@@ -106,7 +116,6 @@ export default function Product() {
                   );
                 })}
               </>
-
               {search ? (
                 ""
               ) : (
@@ -139,6 +148,7 @@ export default function Product() {
             <>
               {products ? (
                 <>
+                
                   {setSearchProduct(search).map((product, index) => {
                     return (
                       <div

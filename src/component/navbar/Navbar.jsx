@@ -10,12 +10,15 @@ import {
 import { useRef, useState } from "react";
 import "./navbar.css";
 
-import { useDispatch } from "react-redux";
+//custom hook ...
+import useTimer from "../../hooks/useDebounce";
+
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 //by importing this setsearch thing here---it is doing both the setting the data for both the seraching as well as for filtering
 import { setSearch } from "./navSlice";
-import { fetchAsync } from "../home/product/productSlice";
+import useDebounce from "../../hooks/useDebounce";
 
 function Navbar() {
   //state to handle the bar menu icon in mobile view
@@ -27,21 +30,20 @@ function Navbar() {
   //state to store the searching text
   const [searchData, setSearchData] = useState("");
 
-  //this function will handle the debouncing
-  //so everytime this function executes it will set teh serachdata from the  input
-  //there is this setsearch action which will set the search which we will the data into the product when searching ....
-
-  const timeRef = useRef(null);
+  const productInCart = JSON.parse(localStorage.getItem("cart"));
+  console.log("product in cart  : ", productInCart);
+  const productInWishList = JSON.parse(localStorage.getItem("wishList"));
 
   function onChangeHandler(e) {
-    clearTimeout(timeRef.current);
     setSearchData(e.target.value);
-
-    timeRef.current = setTimeout(() => {
-      dispatch(setSearch(searchData));
-    }, 500);
-    console.log("email : ", searchData);
   }
+
+  function Callbackfunction(debounceValue) {
+    dispatch(setSearch({ item: debounceValue, isCategory: false }));
+  }
+
+  const debounceValue = useDebounce(Callbackfunction, searchData, 500);
+  console.log("debounce value : ", debounceValue);
 
   const onclickHandlerForMenuBar = () => {
     setVisible(!visible);
@@ -55,7 +57,7 @@ function Navbar() {
           src="https://cdn.worldvectorlogo.com/logos/uniqlo-1.svg"
           alt=""
           onClick={() => {
-            dispatch(setSearch(""));
+            dispatch(setSearch({ item: "", isCategory: false }));
             navigate("/");
           }}
         />
@@ -67,7 +69,7 @@ function Navbar() {
               key={index}
               onClick={() => {
                 navigate("/");
-                dispatch(setSearch(item));
+                dispatch(setSearch({ item: item, isCategory: true }));
               }}
             >
               {item}
@@ -99,16 +101,20 @@ function Navbar() {
           icon={faUser}
           onClick={() => navigate("/userProfile")}
         ></FontAwesomeIcon>
+        <div>
         <FontAwesomeIcon
           icon={faHeart}
           onClick={() => navigate("/wishList")}
         ></FontAwesomeIcon>
-        <span>{}</span>
+        <span className="product-count">{productInWishList ? productInWishList.length : 0}</span>
+        </div>
+        <div>
         <FontAwesomeIcon
           icon={faShoppingCart}
           onClick={() => navigate("/cart")}
         ></FontAwesomeIcon>
-        <span>{}</span>
+        <span className="product-count">{productInCart ? productInCart.length : 0}</span>
+        </div>
       </div>
       <FontAwesomeIcon
         icon={faBars}

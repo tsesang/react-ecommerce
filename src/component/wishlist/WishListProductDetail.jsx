@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 
 export default function WishListProductDetails() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [product, setProduct] = useState([]);
@@ -45,10 +44,6 @@ export default function WishListProductDetails() {
               <button className="remove" onClick={() => removeHandler(item.id)}>
                 remove
               </button>
-            </div>
-            <div>
-              <p>quantity : {item.quantity} </p>
-              <p>Subtotal : Rs. {item.quantity * item.price} /-</p>
             </div>
           </div>
         );
