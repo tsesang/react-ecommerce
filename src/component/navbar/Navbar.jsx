@@ -10,14 +10,13 @@ import {
 import { useRef, useState } from "react";
 import "./navbar.css";
 
-//custom hook ...
-import useTimer from "../../hooks/useDebounce";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 //by importing this setsearch thing here---it is doing both the setting the data for both the seraching as well as for filtering
 import { setSearch } from "./navSlice";
+
+//custom hook fro deboucing
 import useDebounce from "../../hooks/useDebounce";
 
 function Navbar() {
@@ -30,9 +29,8 @@ function Navbar() {
   //state to store the searching text
   const [searchData, setSearchData] = useState("");
 
-  const productInCart = JSON.parse(localStorage.getItem("cart"));
-  console.log("product in cart  : ", productInCart);
-  const productInWishList = JSON.parse(localStorage.getItem("wishList"));
+  const productInCart = useSelector((state)=>state.cart.items)
+  const productInWishList = useSelector((state)=>state.wishList.wishListItems)
 
   function onChangeHandler(e) {
     setSearchData(e.target.value);
@@ -43,7 +41,6 @@ function Navbar() {
   }
 
   const debounceValue = useDebounce(Callbackfunction, searchData, 500);
-  console.log("debounce value : ", debounceValue);
 
   const onclickHandlerForMenuBar = () => {
     setVisible(!visible);

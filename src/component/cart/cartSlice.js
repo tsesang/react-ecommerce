@@ -17,8 +17,15 @@ export const cartSlice = createSlice({
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item.id != action.payload);
     },
+    editItem: (state, action) => {
+      state.items = state.items.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: action.payload.value };
+        } else return item;
+      });
+    },
   },
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, editItem } = cartSlice.actions;
 export default cartSlice.reducer;

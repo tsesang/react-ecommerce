@@ -3,15 +3,15 @@ import { useSelector } from "react-redux";
 
 export default function CartShoppingSummary() {
 
-//fetching the items from the cart reducer
-  // const cartProduct = useSelector((state)=>state.cart.items)
-  const cartProduct = JSON.parse(localStorage.getItem('cart'));
+
+
+  const products = useSelector((state)=>state.cart.items)
 
   
   //function to calucalute amount
   const calculateAmount = ()=>{
     let totalAmount = 0;
-    for(let item of cartProduct){
+    for(let item of products){
       totalAmount+=((item.price)*(item.quantity));
     }
     return totalAmount;
@@ -37,7 +37,7 @@ export default function CartShoppingSummary() {
           <hr />
         </div>
         <div>
-          <h3>{cartProduct.length } items(s)</h3>
+          <h3>{products.length } items(s)</h3>
           <hr />
           <p>Rs. {calculateAmount()}/-</p>
           <p>Rs. {shipping}/-</p>

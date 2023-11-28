@@ -1,25 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-export default function CartProduct({ item, index, removeHandler,editedProduct }) {
+import { removeItem,editItem } from "./cartSlice";
+
+export default function CartProduct({ item, index, product }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [editInputValue, setEditInputValue] = useState("");
 
-  const editUpdateHandler = (id) => {
-    const cartProduct = JSON.parse(localStorage.getItem("cart"));
 
-    const updatedCart = cartProduct.map((item) => {
-      if (item.id == id) {
-        return { ...item, quantity: editInputValue };
-      } else {
-        return item;
-      }
-    });
-    console.log("after edit : ", updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-    setIsEditing(false);
-    editedProduct(updatedCart)
+
+  const editUpdateHandler = (id) => {
+    console.log("edit input value : ",editInputValue)
+
+    dispatch(editItem({value:editInputValue,id:id}))
+    setIsEditing(false)
   };
 
   return (
@@ -36,7 +33,10 @@ export default function CartProduct({ item, index, removeHandler,editedProduct }
           <p>color : {item.color}</p>
           <p>size : {item.size}</p>
           <p>Rs. {item.price} /-</p>
-          <button className="remove" onClick={() => removeHandler(item.id)}>
+          <button
+            className="remove"
+            onClick={() => dispatch(removeItem(item.id))}
+          >
             remove
           </button>
         </div>
@@ -45,14 +45,17 @@ export default function CartProduct({ item, index, removeHandler,editedProduct }
             {isEditing ? (
               <>
                 <input
-                className="edit-quantity-input"
+                  className="edit-quantity-input"
                   type="number"
                   value={editInputValue}
                   min={1}
                   max={8}
                   onChange={(e) => setEditInputValue(e.target.value)}
                 />
-                <button onClick={() => editUpdateHandler(item.id)} className="cart-quantity-button">
+                <button
+                  onClick={() => editUpdateHandler(item.id)}
+                  className="cart-quantity-button"
+                >
                   update
                 </button>
               </>
@@ -60,8 +63,8 @@ export default function CartProduct({ item, index, removeHandler,editedProduct }
               <>
                 {" "}
                 quantity {item.quantity}
-                <button 
-                className="cart-quantity-button"
+                <button
+                  className="cart-quantity-button"
                   onClick={() => {
                     setIsEditing(true), setEditInputValue(item.quantity);
                   }}

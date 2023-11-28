@@ -5,18 +5,11 @@ import Navbar from "../navbar/Navbar";
 
 
 import "./wishList.css";
+import { useSelector } from "react-redux";
 
 export default function WishList() {
-  //fetching the cart items from the cart reducer so that we can chekc if it is null or not
-  //depending on that we are doing conditional rendering of the page
-  //null - means no items in cart
-  //not null - render the cartproductDetail  and cartshoppingSummary components
-  // const wishListProduct = useSelector((state) => state.wishList.wishListItems);
 
-  const wishListProduct = JSON.parse(localStorage.getItem("wishList") || "[]");
-
-  //localstorage get the item in wishlist
-
+  const wishListProduct = useSelector((state)=>state.wishList.wishListItems)
   return (
     <>
       <TopNav />

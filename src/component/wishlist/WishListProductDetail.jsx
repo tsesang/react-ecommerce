@@ -1,33 +1,23 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeItemFromWishLsit } from "./WishlistSlice";
+
+import { removeItemFromWishList } from "./WishlistSlice";
+
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
 
 export default function WishListProductDetails() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [product, setProduct] = useState([]);
+  const wishListProduct = useSelector((state) => state.wishList.wishListItems);
 
-  //fetching the cart items from cart reducer
-  // const wishListProducts = useSelector((state) => state.wishList.wishListItems);
-  const wishListProducts = JSON.parse(localStorage.getItem("wishList"));
-
-  useEffect(() => {
-    setProduct(wishListProducts);
-  }, []);
-
-  const removeHandler = (id) => {
-    const filterWishList = JSON.parse(localStorage.getItem("wishList")).filter(
-      (item) => item.id != id
-    );
-    localStorage.setItem("wishList", JSON.stringify(filterWishList));
-    setProduct(filterWishList);
+  const removewishListItem = (id) => {
+    dispatch(removeItemFromWishList(id))
   };
 
   return (
     <div className="cart-product-details">
-      {product.map((item, index) => {
+      {wishListProduct.map((item, index) => {
         return (
           <div key={index} className="cart-product-details-items">
             <img
@@ -41,7 +31,10 @@ export default function WishListProductDetails() {
               <p>color : {item.color}</p>
               <p>size : {item.size}</p>
               <p>Rs. {item.price} /-</p>
-              <button className="remove" onClick={() => removeHandler(item.id)}>
+              <button
+                className="remove"
+                onClick={() => removewishListItem(item.id)}
+              >
                 remove
               </button>
             </div>

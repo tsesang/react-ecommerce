@@ -5,30 +5,21 @@ import CartShoppingSummary from "./cartShoppingSummary";
 import TopNav from "../topNav/TopNav";
 import Navbar from "../navbar/Navbar";
 
+import {  useSelector } from "react-redux";
+
 
 import "./cart.css";
-import { useEffect, useState } from "react";
 
 export default function Cart() {
-  //fetching the cart items from the cart reducer so that we can chekc if it is null or not
-  //depending on that we are doing conditional rendering of the page
-  //null - means no items in cart
-  //not null - render the cartproductDetail  and cartshoppingSummary components
-  // let cartProduct = useSelector((state) => state.cart.items);
 
-  const [product,setproduct] = useState([]);
-  const cartProduct = JSON.parse(localStorage.getItem('cart')||"[]");
-
-  useEffect(()=>{
-    setproduct(cartProduct)
-  },[])
+  const products = useSelector((state)=>state.cart.items)
 
   return (
     <>
       <TopNav />
       <Navbar />
       <div className="cart">
-        {product.length != 0 ? (
+        {products.length != 0 ? (
           <>
             <h1>Shopping Cart</h1>
             <div className="cart-items">

@@ -14,7 +14,6 @@ export default function Product() {
 
   //fetching the products list from the reducer product
   const products = useSelector((state) => state.product.products);
-  console.log("products : ",products);
 
   //fetching category ---
   const isCategory = useSelector((state) => state.search.isCategory);

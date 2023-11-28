@@ -16,9 +16,6 @@ export default function ProductProfile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //state to check if item is added to cart or not
-  //this can conditional render the whether to show product added part of product profile page
-
   //this is destruturing params from the /productProfile:id - routing on click on product item in homepage
   const { id } = useParams();
 
@@ -51,26 +48,6 @@ export default function ProductProfile() {
 
     dispatch(addItem(updatedProduct));
     navigate("/addedToCart");
-
-    // this thing will fetch the item that is already in wishcart and add the new wishlist that is going to add in the list here
-    let previousCartList = JSON.parse(localStorage.getItem("cart"));
-    let flag = true;
-    if (previousCartList) {
-      previousCartList = previousCartList.map((item) => {
-        if (item.id === updatedProduct.id) {
-          flag = false;
-          return updatedProduct;
-        } else {
-          return item;
-        }
-      });
-      if (flag) {
-        previousCartList.push(updatedProduct);
-      }
-      localStorage.setItem("cart", JSON.stringify(previousCartList));
-    } else {
-      localStorage.setItem("cart", JSON.stringify([updatedProduct]));
-    }
   };
 
   const addToWishListHandler = () => {
@@ -82,15 +59,6 @@ export default function ProductProfile() {
     };
     dispatch(addItemToWishList(updatedProduct));
     navigate("/addedToWishList");
-
-    // this thing will fetch the item that is already in wishcart and add the new wishlist that is going to add in the list here
-    const previousWishList = JSON.parse(localStorage.getItem("wishList"));
-    if (previousWishList) {
-      previousWishList.push(updatedProduct);
-      localStorage.setItem("wishList", JSON.stringify(previousWishList));
-    } else {
-      localStorage.setItem("wishList", JSON.stringify([updatedProduct]));
-    }
   };
 
   //fetching the state product from the productProfile reducer

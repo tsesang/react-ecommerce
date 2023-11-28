@@ -14,11 +14,11 @@ export const wishListSlice = createSlice({
       state.wishListItems.push(action.payload);
     },
     //reducer for removing items from the cart
-    removeItemFromWishLsit: (state, action) => {
+    removeItemFromWishList: (state, action) => {
       state.wishListItems = state.wishListItems.filter((item) => item.id != action.payload);
     },
   },
 });
 
-export const { addItemToWishList,removeItemFromWishLsit } = wishListSlice.actions;
+export const { addItemToWishList,removeItemFromWishList } = wishListSlice.actions;
 export default wishListSlice.reducer;

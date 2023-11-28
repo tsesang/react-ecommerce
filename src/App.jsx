@@ -12,6 +12,9 @@ import AddedToWishList from "./component/addedToWishList/AddedToWishList";
 import UserProfile from "./component/userProfile/UserProfile";
 import NoProductFound from "./component/NoProductFound";
 
+
+import Counter from "./component/Counter/Counter";
+
 function App() {
 
 
@@ -28,6 +31,7 @@ function App() {
           <Route path="userProfile" element={<UserProfile/>}></Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/noProductFound" element={<NoProductFound/>}></Route>
+          <Route path="/counter" element={<Counter/>}></Route>
 
         </Routes>
       </Router>
