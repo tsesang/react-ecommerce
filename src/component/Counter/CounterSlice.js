@@ -9,10 +9,7 @@ export const persistSlice = createSlice({
   reducers: {
     //reducer for adding items to the cart
     increase: (state,action) => {
-        console.log("in counter increase..........")
       state.number = state.number+1;
-      console.log("state. number : ",state.number)
-    //   console.log("state number : ",state.number)
     },
   },
 });

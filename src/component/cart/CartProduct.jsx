@@ -13,7 +13,6 @@ export default function CartProduct({ item, index, product }) {
 
 
   const editUpdateHandler = (id) => {
-    console.log("edit input value : ",editInputValue)
 
     dispatch(editItem({value:editInputValue,id:id}))
     setIsEditing(false)
