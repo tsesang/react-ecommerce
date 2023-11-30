@@ -30,7 +30,6 @@ function Navbar() {
   const [searchData, setSearchData] = useState("");
 
   const productInCart = useSelector((state)=>state.cart.items)
-  const productInWishList = useSelector((state)=>state.wishList.wishListItems)
 
   function onChangeHandler(e) {
     setSearchData(e.target.value);
@@ -103,7 +102,6 @@ function Navbar() {
           icon={faHeart}
           onClick={() => navigate("/wishList")}
         ></FontAwesomeIcon>
-        <span className="product-count">{productInWishList ? productInWishList.length : 0}</span>
         </div>
         <div>
         <FontAwesomeIcon

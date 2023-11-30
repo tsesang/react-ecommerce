@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { removeItem,editItem } from "./cartSlice";
+import { removeItem, editItem } from "./cartSlice";
 
 export default function CartProduct({ item, index, product }) {
   const dispatch = useDispatch();
@@ -10,12 +10,9 @@ export default function CartProduct({ item, index, product }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editInputValue, setEditInputValue] = useState("");
 
-
-
   const editUpdateHandler = (id) => {
-
-    dispatch(editItem({value:editInputValue,id:id}))
-    setIsEditing(false)
+    dispatch(editItem({ value: editInputValue, id: id }));
+    setIsEditing(false);
   };
 
   return (
@@ -29,6 +26,7 @@ export default function CartProduct({ item, index, product }) {
         <div className="details">
           <p className="title">{item.title}</p>
           <p>product id : {item.id}</p>
+          <p>product cartid : {item.cartId}</p>
           <p>color : {item.color}</p>
           <p>size : {item.size}</p>
           <p>Rs. {item.price} /-</p>

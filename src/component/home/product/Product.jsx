@@ -44,6 +44,7 @@ export default function Product() {
     }
   }
 
+  
   // Intersection observer
 
   const [loading, setLoading] = useState(false);
@@ -52,6 +53,7 @@ export default function Product() {
 
   useEffect(() => {
     if (loading) {
+      console.log("loading.....");
       dispatch(fetchAsync(offset - 1));
     }
   }, [offset]);
@@ -60,6 +62,7 @@ export default function Product() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
+          console.log("intersecting...");
           setOffset((prev) => prev + 1);
           setLoading(true);
         }
@@ -147,7 +150,6 @@ export default function Product() {
             <>
               {products ? (
                 <>
-                
                   {setSearchProduct(search).map((product, index) => {
                     return (
                       <div
@@ -180,7 +182,7 @@ export default function Product() {
               )}
             </>
           )}
-          <span ref={observerRef}></span>
+          <span ref={observerRef}>span intersecting....</span>
         </div>
       </div>
     </SkeletonTheme>

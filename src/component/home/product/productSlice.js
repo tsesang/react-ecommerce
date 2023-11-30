@@ -10,6 +10,7 @@ const initialState = {
 export const fetchAsync = createAsyncThunk(
   "products/fetchProduct",
   async (page) => {
+    console.log("fetching...")
     const response = await fetchProducts(page);
     return response.data;
   }

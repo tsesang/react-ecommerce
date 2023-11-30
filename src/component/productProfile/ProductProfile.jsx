@@ -28,11 +28,16 @@ export default function ProductProfile() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   //state for storing the color of product chosen
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("yellow");
   //state for storing the size of the product chosen
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState("M");
   //state for storing the quantity of the product chosen
   const [quantity, setQuantity] = useState(1);
+
+  //quantity handler
+  function quantityHandler(e) {
+    setQuantity(e.target.value);
+  }
 
   //function to handle the product add to cart functionality
   const addToCartHandler = () => {
@@ -146,10 +151,10 @@ export default function ProductProfile() {
               Quantity{" "}
               <input
                 type="number"
-                value={product.quantity}
+                value={quantity}
                 min={1}
                 max={5}
-                onChange={(e) => setQuantity(e.target.value)}
+                onChange={quantityHandler}
               />
             </p>
             <div className="color">
@@ -190,7 +195,7 @@ export default function ProductProfile() {
               <span
                 onClick={() => setSize("S")}
                 style={{
-                  border: color == "S" ? "2px solid black" : "",
+                  border: size == "S" ? "2px solid black" : "",
                 }}
               >
                 S
