@@ -1,4 +1,4 @@
-import { compose, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
   status: "",
@@ -18,7 +18,6 @@ export const cartSlice = createSlice({
 
       const cartId =
         action.payload.id + action.payload.size + action.payload.color;
-      console.log("cartId : ", cartId);
 
       //checking if the added item is already there  in the cart
       if (itemFound) {
@@ -50,12 +49,11 @@ export const cartSlice = createSlice({
     },
     //reducer for removing items from the cart
     removeItem: (state, action) => {
-      console.log("removing...")
       state.items = state.items.filter((item) => item.cartId != action.payload);
     },
     editItem: (state, action) => {
       state.items = state.items.map((item) => {
-        if (item.id === action.payload.id) {
+        if (item.cartId === action.payload.id) {
           return { ...item, quantity: action.payload.value };
         } else return item;
       });

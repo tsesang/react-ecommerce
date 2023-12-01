@@ -10,8 +10,8 @@ export default function CartProduct({ item, index, product }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editInputValue, setEditInputValue] = useState("");
 
-  const editUpdateHandler = (id) => {
-    dispatch(editItem({ value: editInputValue, id: id }));
+  const editUpdateHandler = (cartId) => {
+    dispatch(editItem({ value: editInputValue, id: cartId }));
     setIsEditing(false);
   };
 
@@ -27,7 +27,6 @@ export default function CartProduct({ item, index, product }) {
           <p className="title">{item.title}</p>
           <p>cartID : {item.cartId}</p>
           <p>color : {item.color}</p>
-
           <p>size : {item.size}</p>
           <p>Rs. {item.price} /-</p>
           <button
@@ -50,7 +49,7 @@ export default function CartProduct({ item, index, product }) {
                   onChange={(e) => setEditInputValue(e.target.value)}
                 />
                 <button
-                  onClick={() => editUpdateHandler(item.id)}
+                  onClick={() => editUpdateHandler(item.cartId)}
                   className="cart-quantity-button"
                 >
                   update

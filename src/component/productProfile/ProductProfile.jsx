@@ -36,13 +36,20 @@ export default function ProductProfile() {
 
   //quantity handler
   function quantityHandler(e) {
-    setQuantity(e.target.value);
+    if (e.target.value == "-" || e.target.value == "+") {
+      setQuantity(quantity);
+    } else {
+      setQuantity(e.target.value);
+    }
   }
 
   //function to handle the product add to cart functionality
   const addToCartHandler = () => {
     //updating the product obj by adding the color,size,quanity
     //this set thing will display item added to cart on click --- kind of notification -- conidtioanal render on cart page
+      if(String(quantity).includes("-") || String(quantity).includes("+")){
+        setQuantity(prev=>prev-(prev-1));
+      }
     const updatedProduct = {
       ...product,
       color: color,
@@ -99,7 +106,7 @@ export default function ProductProfile() {
           <div className="img">
             {(product.images || []).map((item, index) => {
               return (
-                <div id="index">
+                <div id="index" key={index}>
                   <button
                     className="img-button"
                     onClick={() => {

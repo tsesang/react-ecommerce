@@ -9,7 +9,7 @@ export default function CartProductDetails() {
     <div className="cart-product-details">
       {products.map((item, index) => {
         return (
-          <CartProduct
+          <CartProduct key={index}
             item={item}
             index={index}
             product={products}

@@ -53,7 +53,6 @@ export default function Product() {
 
   useEffect(() => {
     if (loading) {
-      console.log("loading.....");
       dispatch(fetchAsync(offset - 1));
     }
   }, [offset]);
@@ -62,7 +61,6 @@ export default function Product() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          console.log("intersecting...");
           setOffset((prev) => prev + 1);
           setLoading(true);
         }
