@@ -25,14 +25,14 @@ export default function CartProduct({ item, index, product }) {
         />
         <div className="details">
           <p className="title">{item.title}</p>
-          <p>product id : {item.id}</p>
-          <p>product cartid : {item.cartId}</p>
+          <p>cartID : {item.cartId}</p>
           <p>color : {item.color}</p>
+
           <p>size : {item.size}</p>
           <p>Rs. {item.price} /-</p>
           <button
             className="remove"
-            onClick={() => dispatch(removeItem(item.id))}
+            onClick={() => dispatch(removeItem(item.cartId))}
           >
             remove
           </button>

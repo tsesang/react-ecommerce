@@ -16,7 +16,10 @@ export const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
 
-      let cartId = state.items.length;
+      const cartId =
+        action.payload.id + action.payload.size + action.payload.color;
+      console.log("cartId : ", cartId);
+
       //checking if the added item is already there  in the cart
       if (itemFound) {
         //if added cart has same color size then it would be added to preexisted items with updated quantity
@@ -35,19 +38,20 @@ export const cartSlice = createSlice({
               return updatedItem;
             } else {
               //if not matching size and color then add as another item
-              return item;
+              return {item};
             }
           });
           //if not same then add item
         } else {
-          state.items.push(action.payload);
+          state.items.push({...action.payload,cartId:cartId});
         }
         //if item not exited (new item ) then add the item
       } else state.items.push({ ...action.payload,cartId:cartId });
     },
     //reducer for removing items from the cart
     removeItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id != action.payload);
+      console.log("removing...")
+      state.items = state.items.filter((item) => item.cartId != action.payload);
     },
     editItem: (state, action) => {
       state.items = state.items.map((item) => {
