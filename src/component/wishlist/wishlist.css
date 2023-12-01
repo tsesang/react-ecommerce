@@ -41,6 +41,23 @@
   font-weight: 700;
   font-size: 1rem;
   border-radius: 0.2rem;
+  margin-top: 10px;
+}
+.add-to-cart {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+  margin-top: 10px;
+}
+
+.add-to-cart:hover{
+  background-color: red;
+  color: white;
 }
 
 /* carrt shopping summary*/

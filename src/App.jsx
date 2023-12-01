@@ -26,9 +26,9 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/wishList" element={<WishList />} />
           <Route path="/productProfile/:id" element={<ProductProfile />} />
-          <Route path="addedToCart" element={<AddedToCart/>}></Route>
-          <Route path="addedToWishList" element={<AddedToWishList/>}></Route>
-          <Route path="userProfile" element={<UserProfile/>}></Route>
+          <Route path="/addedToCart" element={<AddedToCart/>}></Route>
+          <Route path="/addedToWishList" element={<AddedToWishList/>}></Route>
+          <Route path="/userProfile" element={<UserProfile/>}></Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/noProductFound" element={<NoProductFound/>}></Route>
           <Route path="/counter" element={<Counter/>}></Route>
