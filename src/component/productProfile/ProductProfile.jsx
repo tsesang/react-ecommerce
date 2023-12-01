@@ -4,8 +4,12 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import { fetchProfileAsync } from "./productProfileSlice";
-import { addItem } from "../cart/cartSlice";
-import { addItemToWishList } from "../wishlist/WishlistSlice";
+import { addItem, itemAdded } from "../cart/cartSlice";
+import {
+  addItemToWishList,
+  addedItem,
+  setMessage,
+} from "../wishlist/WishlistSlice";
 
 import Navbar from "../navbar/Navbar";
 import TopNav from "../topNav/TopNav";
@@ -47,9 +51,9 @@ export default function ProductProfile() {
   const addToCartHandler = () => {
     //updating the product obj by adding the color,size,quanity
     //this set thing will display item added to cart on click --- kind of notification -- conidtioanal render on cart page
-      if(String(quantity).includes("-") || String(quantity).includes("+")){
-        setQuantity(prev=>prev-(prev-1));
-      }
+    if (String(quantity).includes("-") || String(quantity).includes("+")) {
+      setQuantity((prev) => prev - (prev - 1));
+    }
     const updatedProduct = {
       ...product,
       color: color,
@@ -57,10 +61,13 @@ export default function ProductProfile() {
       quantity: quantity,
     };
     //dispatching the updatedProduct obj to the reducer
-
+    dispatch(itemAdded(updatedProduct));
     dispatch(addItem(updatedProduct));
     navigate("/addedToCart");
   };
+
+  //fetching all the product in wishlist to check if the adding product is already there or not
+  const wishListItems = useSelector((state) => state.wishList.wishListItems);
 
   const addToWishListHandler = () => {
     const updatedProduct = {
@@ -69,8 +76,19 @@ export default function ProductProfile() {
       size: size,
       quantity: quantity,
     };
-    dispatch(addItemToWishList(updatedProduct));
-    navigate("/addedToWishList");
+
+    const check = wishListItems.find((item) => item.id == updatedProduct.id);
+
+    if (check) {
+      dispatch(setMessage("product already present in wishlist"));
+      dispatch(addedItem(null))
+      navigate("/addedToWishList");
+    } else {
+      dispatch(addItemToWishList(updatedProduct));
+      dispatch(addedItem(updatedProduct));
+      dispatch(setMessage("product added to wishlist"));
+      navigate("/addedToWishList");
+    }
   };
 
   //fetching the state product from the productProfile reducer

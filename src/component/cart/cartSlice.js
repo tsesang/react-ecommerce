@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   items: [],
   status: "",
+  item:{}
   // id for setting the value for product profile ( product id to be displayed on click on imag)
 };
 
@@ -10,6 +11,9 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     //reducer for adding items to the cart
+    itemAdded:(state,action)=>{
+      state.item = action.payload
+    },
     addItem: (state, action) => {
       //finding the item....
       const itemFound = state.items.find(
@@ -61,5 +65,5 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addItem, removeItem, editItem } = cartSlice.actions;
+export const { addItem, removeItem, editItem ,itemAdded} = cartSlice.actions;
 export default cartSlice.reducer;

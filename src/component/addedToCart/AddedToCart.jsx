@@ -9,10 +9,7 @@ import Navbar from "../navbar/Navbar";
 
 export default function AddedToCart() {
   //fetching the state product from the productProfile reducer
-  const product = useSelector((state) => state.cart.items);
-
-  //consider the added to cart item is the last item in cart
-  const addedProduct = product[product.length - 1];
+  const addedProduct = useSelector((state) => state.cart.item);
 
   const navigate = useNavigate();
 
