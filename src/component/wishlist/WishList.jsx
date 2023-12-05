@@ -3,8 +3,7 @@ import TopNav from "../topNav/TopNav";
 import Navbar from "../navbar/Navbar";
 
 
-
-import "./wishList.css";
+import './wishlist.css'
 import { useSelector } from "react-redux";
 
 export default function WishList() {

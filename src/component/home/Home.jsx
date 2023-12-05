@@ -9,7 +9,7 @@ export default function Home() {
     <>
       <TopNav />
       <Navbar />
-      <Carousel />
+      <Carousel/>
       <Product />
     </>
   );

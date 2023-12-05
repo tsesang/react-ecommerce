@@ -44,7 +44,6 @@ export default function Product() {
     }
   }
 
-  
   // Intersection observer
 
   const [loading, setLoading] = useState(false);
@@ -61,18 +60,19 @@ export default function Product() {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
+          console.log("intersecting....");
           setOffset((prev) => prev + 1);
           setLoading(true);
         }
       },
       {
-        threshold: 1,
+        threshold: .5,
       }
     );
     if (observerRef.current) {
       observer.observe(observerRef.current);
     }
-
+    console.log("observer ref : ", observerRef.current);
     return () => {
       if (observerRef.current) observer.disconnect(observerRef.current);
     };
@@ -180,7 +180,7 @@ export default function Product() {
               )}
             </>
           )}
-          <span ref={observerRef}>span intersecting....</span>
+          <span  ref={observerRef}>{"loading more products..... "}</span>
         </div>
       </div>
     </SkeletonTheme>
