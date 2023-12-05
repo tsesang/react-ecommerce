@@ -8,7 +8,7 @@ import Navbar from "../navbar/Navbar";
 import {  useSelector } from "react-redux";
 
 
-import "./cart.css";
+import "./Cart.css";
 
 export default function Cart() {
 
