@@ -25,7 +25,6 @@ export default function CartProduct({ item, index, product }) {
         />
         <div className="details">
           <p className="title">{item.title}</p>
-          <p>cartID : {item.cartId}</p>
           <p>color : {item.color}</p>
           <p>size : {item.size}</p>
           <p>Rs. {item.price} /-</p>

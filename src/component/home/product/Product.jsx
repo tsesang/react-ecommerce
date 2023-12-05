@@ -100,14 +100,12 @@ export default function Product() {
                         imgClickHandler(product.id);
                       }}
                     >
-                      <button>
                         {
                           <img
                             src={product.category.image}
                             alt={product.image}
                           />
                         }
-                      </button>
                       <p className="name uppercase">{product.category.name}</p>
                       <h3 className="title ">{product.title}</h3>
                       <h3 className="price">Rs. {product.price}</h3>
@@ -157,14 +155,12 @@ export default function Product() {
                           imgClickHandler(product.id);
                         }}
                       >
-                        <button>
                           {
                             <img
                               src={product.category.image}
                               alt={product.image}
                             />
                           }
-                        </button>
                         <p className="name uppercase">
                           {product.category.name}
                         </p>
